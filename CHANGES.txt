@@ -1,0 +1,12 @@
+Changes
+*******
+
+0.1 (unreleased)
+================
+
+* Added support for local ``zope_conf`` parameter.
+  Fix bug https://bugs.launchpad.net/grok/+bug/320644
+
+* Created ``grokcore.startup`` in January 2009 by factoring paster
+  related application code out of grokcore templates.
+
