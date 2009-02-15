@@ -1,7 +1,7 @@
 Changes
 *******
 
-0.1 (unreleased)
+0.1 (2009-01-15)
 ================
 
 * Added support for local ``zope_conf`` parameter.
