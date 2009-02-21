@@ -200,10 +200,42 @@ API Documentation
     >>> app_factory
     <zope.app.wsgi.WSGIPublisherApplication object at 0x...>
 
+
+``interactive_debug_prompt(zope_conf_path)``
+--------------------------------------------
+
+  Get an interactive console with a debugging shell started.
+
+  Normally used as entry point in projects ``setup.py``.
+
+  The debugger will be started with the configuration given in
+  `zope.conf_path`.
+
+  We cannot start an interactive console here, but we can at least
+  import the debugger function::
+
+    >>> from grokcore.startup import interactive_debug_prompt
+
+``zdaemon_controller(zdaemon_conf_path)``
+-----------------------------------------
+
+  Wrapper function to start a zdaemon.
+
+  Normally used as entry point in projects ``setup.py``.
+
+  The zdaemon is started using the given configuration in
+  `zdaemon_conf_path`::
+
+  We do not start a complete environment here, but we can at least
+  import the wrapper function::
+
+    >>> from grokcore.startup import zdaemon_controller
+
   Clean up::
 
     >>> import shutil
     >>> shutil.rmtree(temp_dir)
+
 
 Update Instructions
 *******************
