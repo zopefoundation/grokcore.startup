@@ -224,7 +224,7 @@ API Documentation
   Normally used as entry point in projects ``setup.py``.
 
   The zdaemon is started using the given configuration in
-  `zdaemon_conf_path`::
+  `zdaemon_conf_path`.
 
   We do not start a complete environment here, but we can at least
   import the wrapper function::
