@@ -12,5 +12,6 @@
 #
 ##############################################################################
 # Make this a package.
-from grokcore.startup.startup import application_factory
-
+from grokcore.startup.startup import (application_factory,
+                                      interactive_debug_prompt,
+                                      zdaemon_controller)
