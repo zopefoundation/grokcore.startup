@@ -4,6 +4,8 @@ Changes
 0.3 (unreleased)
 ================
 
+* Bring versions.cfg in line with current grok versions.cfg.
+
 0.2 (2009-02-21)
 ================
 
