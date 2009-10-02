@@ -4,6 +4,14 @@ Changes
 0.3 (unreleased)
 ================
 
+* Add a ``debug_application_factory`` function that allows for the
+  ``exempt-exceptions`` configuration option. The value for this option
+  should be a comma seperated list of dotted names for each of the exceptions
+  that should not be re-raised during debugging.
+
+  This for one allow the IUnauthorized exception to still be handled by zope
+  and thus have the normal authentication mechanisms still work.
+
 * Bring versions.cfg in line with current grok versions.cfg.
 
 0.2 (2009-02-21)

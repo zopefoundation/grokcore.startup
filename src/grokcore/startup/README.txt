@@ -54,12 +54,12 @@ in ``setup.py``. A minimal setup could look like this::
 
   # setup.py
   from setuptools import setup, find_packages
-  
+
   setup(name='sampleproject',
         version='0.1dev',
         description="A sample project",
         long_description="""Without a long description.""",
-        classifiers=[], 
+        classifiers=[],
         keywords="",
         author="U.N.Owen",
         author_email="",
@@ -85,7 +85,7 @@ Furthermore we need at least a minimal ``buildout.cfg`` which enables
   [buildout]
   develop = .
   parts = app
-  
+
   [app]
   recipe = zc.recipe.egg
   eggs = sampleproject
@@ -121,7 +121,7 @@ A short ``zope.conf`` file for use in tests could look like this::
   <zodb>
     <mappingstorage />
   </zodb>
-  
+
   <eventlog>
     <logfile>
       path STDOUT
@@ -139,12 +139,12 @@ created by `grokproject`_::
 
   [app:main]
   use = egg:sampleproject
-  
+
   [server:main]
   use = egg:Paste#http
   host = 127.0.0.1
   port = 8080
-  
+
   [DEFAULT]
   zope_conf = %(here)s/zope.conf
 
@@ -196,9 +196,61 @@ API Documentation
   Now we can call ``application_factory`` to get a WSGI application::
 
     >>> from grokcore.startup import application_factory
-    >>> app_factory = application_factory(dict(zope_conf = zope_conf))
+    >>> app_factory = application_factory({'zope_conf': zope_conf})
     >>> app_factory
     <zope.app.wsgi.WSGIPublisherApplication object at 0x...>
+
+  There's a second application factory that can be used when debugging
+  the application, especially when using the ``z3c.evalexception`` middleware.
+
+  When debugging zope is instructed not to handle any raised exceptions
+  itself. The ``z3c.evalexception`` middleware then catches the exceptions
+  and provides an user interfaces for debugging in the webbrowser.
+
+  As a result also the IUnauthorized execption would not be handled by zope
+  the authentication mechanisms of zope are not triggered. As a result, when
+  debugging one cannot login.
+
+  The ``debug_application_factory`` function accepts the "exempt-execptions"
+  configuration option. The value for this option should be a comma seperated
+  list of dotted names for each of the execptions that should *still* be
+  handled by zope and not re-raised to be catched by the middleware.
+
+    >>> from grokcore.startup import debug_application_factory
+    >>> app_factory = debug_application_factory({'zope_conf': zope_conf})
+    >>> app_factory
+    <zope.app.wsgi.WSGIPublisherApplication object at 0x...>
+
+    >>> from zope.interface import implements
+    >>> from zope.security.interfaces import IUnauthorized
+    >>> class UnauthorizedException(object):
+    ...     implements(IUnauthorized)
+    >>>
+    >>> from zope.component import queryAdapter
+    >>> from zope.publisher.interfaces import IReRaiseException
+
+Since the ``exempt-execptions`` configuration option was not passed, there's
+no IReRaiseException adapter registered for any type of exceptions including
+IUnauthorized:
+
+    >>> error = UnauthorizedException()
+    >>> reraise = queryAdapter(error, IReRaiseException, default=None)
+    >>> reraise is None
+    True
+
+When the option is passed, the adapter will be registered. Calling this
+adapter yields ``False``, telling zope not to reraise this particular
+exception.
+
+    >>> app_factory = debug_application_factory(
+    ...     {'zope_conf': zope_conf},
+    ...     **{'exempt-exceptions': 'zope.security.interfaces.IUnauthorized'})
+    >>>
+    >>> reraise = queryAdapter(error, IReRaiseException, default=None)
+    >>> reraise is None
+    False
+    >>> reraise()
+    False
 
 
 ``interactive_debug_prompt(zope_conf_path)``
