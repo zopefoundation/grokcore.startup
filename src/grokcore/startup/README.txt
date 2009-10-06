@@ -200,6 +200,9 @@ API Documentation
     >>> app_factory
     <zope.app.wsgi.WSGIPublisherApplication object at 0x...>
 
+``debug_application_factory(global_conf, **local_conf)``
+--------------------------------------------------------
+
   There's a second application factory that can be used when debugging
   the application, especially when using the ``z3c.evalexception`` middleware.
 
@@ -208,10 +211,10 @@ API Documentation
   and provides an user interfaces for debugging in the webbrowser.
 
   As a result also the IUnauthorized execption would not be handled by zope
-  the authentication mechanisms of zope are not triggered. As a result, when
-  debugging one cannot login.
+  and the authentication mechanisms of zope are not triggered. As a result,
+  when debugging one cannot login.
 
-  The ``debug_application_factory`` function accepts the "exempt-execptions"
+  The ``debug_application_factory`` function accepts the "exempt-exceptions"
   configuration option. The value for this option should be a comma seperated
   list of dotted names for each of the execptions that should *still* be
   handled by zope and not re-raised to be catched by the middleware.
@@ -229,18 +232,18 @@ API Documentation
     >>> from zope.component import queryAdapter
     >>> from zope.publisher.interfaces import IReRaiseException
 
-Since the ``exempt-execptions`` configuration option was not passed, there's
-no IReRaiseException adapter registered for any type of exceptions including
-IUnauthorized:
+  Since the ``exempt-execptions`` configuration option was not passed,
+  there's no IReRaiseException adapter registered for any type of exceptions
+  including IUnauthorized:
 
     >>> error = UnauthorizedException()
     >>> reraise = queryAdapter(error, IReRaiseException, default=None)
     >>> reraise is None
     True
 
-When the option is passed, the adapter will be registered. Calling this
-adapter yields ``False``, telling zope not to reraise this particular
-exception.
+  When the option is passed, the adapter will be registered. Calling this
+  adapter yields ``False``, telling zope not to reraise this particular
+  exception.
 
     >>> app_factory = debug_application_factory(
     ...     {'zope_conf': zope_conf},
