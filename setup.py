@@ -15,6 +15,8 @@ long_description = (
 tests_require = [
     'zope.app.testing',
     'zope.component',
+    'zope.interface',
+    'zope.testing',
     ]
 
 setup(
@@ -41,7 +43,6 @@ setup(
     zip_safe=False,
     install_requires=['setuptools',
                       'zdaemon',
-                      'zope.interface',
                       'zope.component',
                       'zope.security',
                       'zope.publisher',
