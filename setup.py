@@ -42,7 +42,6 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=['setuptools',
-                      'zdaemon',
                       'zope.component',
                       'zope.security',
                       'zope.publisher',
@@ -52,4 +51,10 @@ setup(
                       ],
     tests_require = tests_require,
     extras_require = dict(test=tests_require),
+    entry_points={
+        'paste.app_factory': [
+            'main = grokcore.startup:application_factory',
+            'debug = grokcore.startup:debug_application_factory',
+            ]
+    },
 )

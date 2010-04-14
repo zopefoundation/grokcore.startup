@@ -4,7 +4,8 @@ Changes
 0.5 (unreleased)
 ================
 
-- Nothing changed yet.
+- Define entry points for main and debug application factories in
+  grokcore.startup.
 
 
 0.4 (2009-10-06)
