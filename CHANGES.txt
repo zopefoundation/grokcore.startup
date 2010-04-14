@@ -4,6 +4,10 @@ Changes
 0.5 (unreleased)
 ================
 
+- Remove the zdaemon controller.
+
+- The upgrade notes will be moved to the Grok upgrade notes.
+
 - Define entry points for main and debug application factories in
   grokcore.startup.
 

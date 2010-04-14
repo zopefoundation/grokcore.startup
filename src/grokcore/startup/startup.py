@@ -1,12 +1,9 @@
 import os.path
-import sys
 import code
-import zdaemon.zdctl
 import zope.app.wsgi
 import zope.app.debug
 
 from zope.component import provideAdapter
-from zope.security.interfaces import IUnauthorized
 from zope.publisher.interfaces import IReRaiseException
 from zope.dottedname.resolve import resolve
 
@@ -48,16 +45,3 @@ def interactive_debug_prompt(zope_conf=os.path.join('parts', 'etc',
                                         'app':      debugger,
                                         'root':     debugger.root()})
 
-class ControllerCommands(zdaemon.zdctl.ZDCmd):
-
-    def do_debug(self, rest):
-        interactive_debug_prompt()
-
-    def help_debug(self):
-        print "debug -- Initialize the application, providing a debugger"
-        print "         object at an interactive Python prompt."
-
-def zdaemon_controller(zdaemon_conf=os.path.join('parts', 'etc',
-                                                 'zdaemon.conf')):
-    args = ['-C', zdaemon_conf] + sys.argv[1:]
-    zdaemon.zdctl.main(args, options=None, cmdclass=ControllerCommands)
