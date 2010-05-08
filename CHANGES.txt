@@ -4,6 +4,8 @@ Changes
 0.5 (unreleased)
 ================
 
+- Make package comply to zope.org repository policy.
+
 - The upgrade notes will be moved to the Grok upgrade notes.
 
 - Define entry points for main and debug application factories in
