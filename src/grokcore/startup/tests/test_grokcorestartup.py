@@ -14,17 +14,18 @@ checker = renormalizing.RENormalizing([
 optionflags=(doctest.ELLIPSIS+
             doctest.NORMALIZE_WHITESPACE)
 
-main_doctests = ['README.txt',]
+main_doctests = ['README.txt']
 
 def test_suite():
     suite = unittest.TestSuite()
 
     for testfile in main_doctests:
         suite.addTest(
-            doctest.DocFileSuite(os.path.join('..', testfile),
-                                 optionflags=optionflags,
-                                 globs=globals(),
-                                 checker=checker))
+            doctest.DocFileSuite(
+                os.path.join('..', testfile),
+                optionflags=optionflags,
+                globs=globals(),
+                checker=checker))
     return suite
 
 if __name__ == '__main__':

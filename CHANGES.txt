@@ -4,6 +4,11 @@ Changes
 0.5 (unreleased)
 ================
 
+- Amend the interactive_debug_prompt function to behave more or less like the
+  "old" zopectl command. Whenever there's commandline arguments passed to the
+  command, the first one is assumed to be a python script that is 'execfile'd.
+  This allows ad hoc scripts to run against the setup application.
+
 - Make package comply to zope.org repository policy.
 
 - The upgrade notes will be moved to the Grok upgrade notes.

@@ -13,10 +13,14 @@ long_description = (
     )
 
 tests_require = [
+    'zope.app.appsetup',
     'zope.app.testing',
     'zope.component',
+    'zope.container',
     'zope.interface',
+    'zope.site',
     'zope.testing',
+    'zope.traversing',
     ]
 
 setup(

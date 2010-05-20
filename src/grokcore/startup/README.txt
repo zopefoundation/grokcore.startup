@@ -255,22 +255,83 @@ API Documentation
     >>> reraise()
     False
 
+  Clean up the temp_dir
+
+    >>> import shutil
+    >>> shutil.rmtree(temp_dir)
 
 ``interactive_debug_prompt(zope_conf_path)``
 --------------------------------------------
 
   Get an interactive console with a debugging shell started.
 
-  Normally used as entry point in projects ``setup.py``.
+    >>> import zope.app.appsetup.appsetup
+    >>> # Ugh - allow a reconfiguration of an app.
+    >>> zope.app.appsetup.appsetup._configured = False
 
-  The debugger will be started with the configuration given in
-  `zope.conf_path`.
-
-  We cannot start an interactive console here, but we can at least
-  import the debugger function::
-
+    >>> temp_dir = tempfile.mkdtemp()
+    >>> sitezcml = os.path.join(temp_dir, 'site.zcml')
+    >>> open(sitezcml, 'w').write(
+    ...    """<configure xmlns="http://namespaces.zope.org/zope">
+    ...   <include package="zope.component" file="meta.zcml"/>
+    ...   <include package="zope.component"/>
+    ...   <include package="zope.traversing"/>
+    ...   <include package="zope.security" file="meta.zcml"/>
+    ...   <include package="zope.security"/>
+    ...   <include package="zope.container"/>
+    ...   <include package="zope.site"/>
+    ...   <include package="zope.app.appsetup"/>
+    ... </configure>""")
+    >>>
+    >>> zopeconf = os.path.join(temp_dir, 'zope.conf')
+    >>> open(zopeconf, 'w').write("""
+    ...     site-definition %s
+    ...     <zodb>
+    ...       <filestorage>
+    ...         path %s
+    ...       </filestorage>
+    ...     </zodb>
+    ...     <eventlog>
+    ...       <logfile>
+    ...         path STDOUT
+    ...         formatter zope.exceptions.log.Formatter
+    ...       </logfile>
+    ...     </eventlog>
+    ...     """ % (sitezcml, os.path.join(temp_dir, 'Data.fs')))
+    >>>
+    >>> import sys
+    >>> old_argv = sys.argv[:]
+    >>>
+    >>> script = os.path.join(temp_dir, 'script.py')
+    >>> open(script, 'w').write(
+    ...    """import sys
+    ... from pprint import pprint
+    ... pprint(debugger)
+    ... pprint(app)
+    ... pprint(root)
+    ... pprint(sys.argv)""")
+    >>>
+    >>> sys.argv = ['interactive_debug_prompt', script]
     >>> from grokcore.startup import interactive_debug_prompt
+    >>> try:
+    ...     interactive_debug_prompt(zope_conf=zopeconf)
+    ... except SystemExit:
+    ...     pass
+    ------
+    ...WARNING zope.app.appsetup Security policy is not configured.
+    Please make sure that securitypolicy.zcml is included in site.zcml
+    immediately before principals.zcml
+    ...
+    <zope.app.debug.debug.Debugger object at ...>
+    <zope.app.debug.debug.Debugger object at ...>
+    <zope.site.folder.Folder object at ...>
+    ['...script.py']
 
+  Clean up the temp_dir
+
+    >>> sys.argv = old_argv
+    >>> import shutil
+    >>> shutil.rmtree(temp_dir)
 
 .. _grok: http://pypi.python.org/pypi/grok
 .. _grokproject: http://pypi.python.org/pypi/grokproject
