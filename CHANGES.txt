@@ -1,7 +1,7 @@
 Changes
 *******
 
-0.5 (unreleased)
+1.0 (2010-05-20)
 ================
 
 - Amend the interactive_debug_prompt function to behave more or less like the
