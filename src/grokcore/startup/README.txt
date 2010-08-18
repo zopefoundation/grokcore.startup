@@ -309,7 +309,9 @@ API Documentation
     ... pprint(debugger)
     ... pprint(app)
     ... pprint(root)
-    ... pprint(sys.argv)""")
+    ... pprint(sys.argv)
+    ... pprint(__file__)
+    ... pprint(__name__)""")
     >>>
     >>> sys.argv = ['interactive_debug_prompt', script]
     >>> from grokcore.startup import interactive_debug_prompt
@@ -326,6 +328,8 @@ API Documentation
     <zope.app.debug.debug.Debugger object at ...>
     <zope.site.folder.Folder object at ...>
     ['...script.py']
+    '...script.py'
+    '__builtin__'
 
   Clean up the temp_dir
 
