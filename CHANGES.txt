@@ -4,8 +4,8 @@ Changes
 1.0.2 (unreleased)
 ==================
 
-- Nothing changed yet.
-
+- Somehow the intended fix in 1.0.1 did not actually get included in that
+  release. We make the fix again.
 
 1.0.1 (2010-08-18)
 ==================

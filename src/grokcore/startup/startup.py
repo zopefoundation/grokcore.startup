@@ -53,6 +53,7 @@ def interactive_debug_prompt(
         # to run is the first argument.
         del sys.argv[0]
 
+        globals_['__name__'] = '__main__'
         globals_['__file__'] = sys.argv[0]
         execfile(sys.argv[0], globals_)
         sys.exit()

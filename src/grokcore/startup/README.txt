@@ -329,7 +329,7 @@ API Documentation
     <zope.site.folder.Folder object at ...>
     ['...script.py']
     '...script.py'
-    '__builtin__'
+    '__main__'
 
   Clean up the temp_dir
 
