@@ -1,7 +1,7 @@
 Changes
 *******
 
-1.0.2 (unreleased)
+1.0.2 (2010-10-05)
 ==================
 
 - Somehow the intended fix in 1.0.1 did not actually get included in that
