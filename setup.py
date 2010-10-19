@@ -14,13 +14,10 @@ long_description = (
 
 tests_require = [
     'zope.app.appsetup',
-    'zope.app.testing',
     'zope.component',
-    'zope.container',
     'zope.interface',
-    'zope.site',
     'zope.testing',
-    'zope.traversing',
+    'zope.security',
     ]
 
 setup(
@@ -46,9 +43,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=['setuptools',
-                      'zdaemon',
                       'zope.component',
-                      'zope.security',
                       'zope.publisher',
                       'zope.dottedname',
                       'zope.app.wsgi',
