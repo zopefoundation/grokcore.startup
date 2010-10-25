@@ -318,6 +318,8 @@ API Documentation
     >>> try:
     ...     interactive_debug_prompt(zope_conf=zopeconf)
     ... except SystemExit:
+    ...     # Catch the exit from the interactive prompt as it would
+    ...     # exit this test as well.
     ...     pass
     ------
     ...WARNING zope.app.appsetup Security policy is not configured.
