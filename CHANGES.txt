@@ -6,6 +6,11 @@ Changes
 
 - Drop zdaemon support.
 
+- Close the database explicitely when execing a script through the
+  ``interactive_debug_prompt``. This came to light in tests on Windows, as the
+  tests would try to delete the temp directory it created with the still
+  unclosed database file in there.
+
 1.0.2 (2010-10-05)
 ==================
 
@@ -67,4 +72,3 @@ Changes
 
 * Created ``grokcore.startup`` in January 2009 by factoring paster
   related application code out of grokcore templates.
-

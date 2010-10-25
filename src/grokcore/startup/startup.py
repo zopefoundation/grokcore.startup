@@ -56,7 +56,7 @@ def interactive_debug_prompt(
         globals_['__file__'] = sys.argv[0]
         execfile(sys.argv[0], globals_)
 
-        # Housekeeping
+        # Housekeeping.
         db.close()
         sys.exit()
 
