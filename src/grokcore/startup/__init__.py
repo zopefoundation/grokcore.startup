@@ -19,4 +19,4 @@ try:
     import IPython
     from grokcore.startup.debug import interactive_debug_prompt
 except:
-    from grokcore.startup.startup import interactiv_debug_prompt
+    from grokcore.startup.startup import interactive_debug_prompt
