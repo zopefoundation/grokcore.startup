@@ -339,6 +339,53 @@ API Documentation
     >>> import shutil
     >>> shutil.rmtree(temp_dir)
 
+
+Environment without a ZODB
+--------------------------
+
+To setup a grok environment which works without the zodb you
+have to replace the paster-application-factory which typically is
+located in the debug.ini and in the deploy.ini: To be concrete
+replace grokcore.startup#... with megrok.nozodb#nozodb
+
+    [app:grok]
+    use = egg:megrok.nozodb#nozodb
+
+
+We have to create a simple site definition file, which is also quite
+plain::
+
+   >>> import os, tempfile
+   >>> temp_dir = tempfile.mkdtemp()
+
+   >>> sitezcml = os.path.join(temp_dir, 'site.zcml')
+   >>> open(sitezcml, 'w').write('<configure />')
+
+   >>> zope_conf = os.path.join(temp_dir, 'zope.conf')
+   >>> open(zope_conf, 'wb').write('''
+   ... site-definition %s
+   ...
+   ... <zodb>
+   ... </zodb>
+   ...
+   ... <eventlog>
+   ...   <logfile>
+   ...     path STDOUT
+   ...   </logfile>
+   ... </eventlog>
+   ... ''' %sitezcml)
+
+
+   >>> from grokcore.startup import nozodb_factory
+   >>> app_factory = nozodb_factory({'zope_conf': zope_conf})
+
+  Clean up the temp_dir
+
+    >>> import shutil
+    >>> shutil.rmtree(temp_dir)
+
+
+
 .. _grok: http://pypi.python.org/pypi/grok
 .. _grokproject: http://pypi.python.org/pypi/grokproject
 .. _Paste: http://pythonpaste.org/
