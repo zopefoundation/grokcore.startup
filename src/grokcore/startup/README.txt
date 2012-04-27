@@ -346,14 +346,14 @@ Environment without a ZODB
 To setup a grok environment which works without the zodb you
 have to replace the paster-application-factory which typically is
 located in the debug.ini and in the deploy.ini: To be concrete
-replace grokcore.startup#... with megrok.nozodb#nozodb
+replace grokcore.startup#... with grokcore.startup#nozodb
 
     [app:grok]
-    use = egg:megrok.nozodb#nozodb
+    use = egg:grokcore.startup#nozodb
 
 
 We have to create a simple site definition file, which is also quite
-plain::
+plain:
 
    >>> import os, tempfile
    >>> temp_dir = tempfile.mkdtemp()
