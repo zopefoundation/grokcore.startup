@@ -61,16 +61,16 @@ class GrokDebug(object):
                     app=self.app,
                     root=self.root,
                     ctx=self.ctx,
-                    security=self.get_security_settings,
+                    sec=self.get_security_settings,
                     sync=self.sync,
-                    providedBy=self.providedBy,
+                    pby=self.providedBy,
                     commit=self.commit)
 
     def update_ns(self):
         shell.user_ns.update(self.ns())
 
-    def get_security_settings(self):
-        pprint(settingsForObject(self.ctx))
+    def get_security_settings(self, path):
+        pprint(settingsForObject(get_context_by_path(self.get_start_context(path), path)))
 
     def sync(self):
         self.root._p_jar.sync()
@@ -155,8 +155,6 @@ class GrokDebug(object):
             obj = self.ctx
         return list(zope.interface.providedBy(obj)) 
 
-
-
 def get_context_by_path(context, path):
     for name in (p for p in path.split(PATH_SEP) if p):
         context = context[name]
@@ -196,8 +194,8 @@ def interactive_debug_prompt(zope_conf, grokd):
         --------------------
           cdg / ;cdg
           lsg / ;lsg
-          providedBy
-          security
+          sec / ;sec
+          pby (providedBy)
           pwdg
           sync
           commit
