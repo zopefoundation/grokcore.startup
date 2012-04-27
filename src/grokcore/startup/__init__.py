@@ -15,8 +15,10 @@
 from grokcore.startup.startup import (application_factory,
                                       debug_application_factory)
 
-try:
-    import IPython
-    from grokcore.startup.debug import interactive_debug_prompt
-except ImportError:
-    from grokcore.startup.startup import interactive_debug_prompt
+def getDebugger(zope_conf):
+    try:
+        import IPython
+        from grokcore.startup.debug import interactive_debug_prompt
+    except ImportError:
+        from grokcore.startup.startup import interactive_debug_prompt
+    return interactive_debug_prompt(zope_conf)

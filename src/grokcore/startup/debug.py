@@ -36,7 +36,6 @@ class GrokDebug(object):
         self.app = debugger
         self.root = debugger.root()
         self.context = self.root
-        print "CALL"
 
     def get_start_context(self, path):
         if path.startswith(PATH_SEP):
