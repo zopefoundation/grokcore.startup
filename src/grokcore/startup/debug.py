@@ -1,5 +1,4 @@
 #######################################################################
-# Copyright (C) 2009  Ruslan Spivak
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,6 +20,8 @@ import textwrap
 import transaction
 import zope.app.wsgi
 import zope.app.debug
+from pprint import pprint
+from zope.securitypolicy.zopepolicy import settingsForObject
 
 from IPython.frontend.terminal.embed import InteractiveShellEmbed
 shell = InteractiveShellEmbed()
@@ -60,12 +61,16 @@ class GrokDebug(object):
                     app=self.app,
                     root=self.root,
                     ctx=self.ctx,
+                    security=self.get_security_settings,
                     sync=self.sync,
                     providedBy=self.providedBy,
                     commit=self.commit)
 
     def update_ns(self):
         shell.user_ns.update(self.ns())
+
+    def get_security_settings(self):
+        pprint(settingsForObject(self.ctx))
 
     def sync(self):
         self.root._p_jar.sync()
@@ -194,6 +199,7 @@ def interactive_debug_prompt(zope_conf):
           cdg / ;cdg
           lsg / ;lsg
           providedBy
+          security
           pwdg
           sync
           commit
