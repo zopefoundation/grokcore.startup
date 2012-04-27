@@ -401,7 +401,6 @@ a kind of Root is needed. This is an example of a simple RootFolder::
             location.ILocation,
             component.interfaces.ISite)
         grok.provides(site.interfaces.IRootFolder)
-        grok.baseclass()
 
         __name__ = None
         __parent__ = None
