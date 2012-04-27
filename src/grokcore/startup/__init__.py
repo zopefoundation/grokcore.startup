@@ -18,5 +18,5 @@ from grokcore.startup.startup import (application_factory,
 try:
     import IPython
     from grokcore.startup.debug import interactive_debug_prompt
-except:
+except ImportError:
     from grokcore.startup.startup import interactive_debug_prompt

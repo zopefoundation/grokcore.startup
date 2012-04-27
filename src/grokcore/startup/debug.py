@@ -180,8 +180,7 @@ def path_completer(self, event):
             if obj.__name__.startswith(tail)]
 
 
-def interactiv_debug_prompt(zope_conf):
-
+def interactive_debug_prompt(zope_conf):
     banner = textwrap.dedent(
         """\
         IPython shell for Grok.
