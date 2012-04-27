@@ -157,8 +157,6 @@ class GrokDebug(object):
 
 
 
-grokd = GrokDebug()
-
 def get_context_by_path(context, path):
     for name in (p for p in path.split(PATH_SEP) if p):
         context = context[name]
@@ -184,7 +182,7 @@ def path_completer(self, event):
             if obj.__name__.startswith(tail)]
 
 
-def interactive_debug_prompt(zope_conf):
+def interactive_debug_prompt(zope_conf, grokd):
     banner = textwrap.dedent(
         """\
         IPython shell for Grok.
