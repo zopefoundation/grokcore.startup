@@ -18,6 +18,7 @@ tests_require = [
     'zope.interface',
     'zope.testing',
     'zope.security',
+    'grokcore.view',
     ]
 
 setup(
