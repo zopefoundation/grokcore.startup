@@ -13,5 +13,10 @@
 ##############################################################################
 # Make this a package.
 from grokcore.startup.startup import (application_factory,
-                                      debug_application_factory,
-                                      interactive_debug_prompt)
+                                      debug_application_factory)
+
+try:
+    import IPython
+    from grokcore.startup.debug import interactive_debug_prompt
+except:
+    from grokcore.startup.startup import interactiv_debug_prompt
