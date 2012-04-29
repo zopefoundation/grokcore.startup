@@ -70,7 +70,8 @@ class GrokDebug(object):
         shell.user_ns.update(self.ns())
 
     def get_security_settings(self, path):
-        pprint(settingsForObject(get_context_by_path(self.get_start_context(path), path)))
+        pprint(settingsForObject(get_context_by_path(
+                    self.get_start_context(path), path)))
 
     def sync(self):
         self.root._p_jar.sync()
@@ -180,7 +181,8 @@ def path_completer(self, event):
             if obj.__name__.startswith(tail)]
 
 
-def interactive_debug_prompt(zope_conf, grokd):
+def ipython_debug_prompt(zope_conf):
+    grokd = GrokDebug(zope_conf)
     banner = textwrap.dedent(
         """\
         IPython shell for Grok.

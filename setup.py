@@ -18,6 +18,7 @@ tests_require = [
     'zope.interface',
     'zope.testing',
     'zope.security',
+    'zope.securitypolicy',
     ]
 
 debug_requires = [
