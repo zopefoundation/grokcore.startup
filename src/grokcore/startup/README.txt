@@ -284,7 +284,7 @@ API Documentation
 
   or::
 
-    grokcore.startup.debug.interactive_debug_prompt(zope_conf)
+    grokcore.startup.debug.ipython_debug_prompt(zope_conf)
 
   in the ``[interactive_debugger]`` section of your ``buildout.cfg``.
 
