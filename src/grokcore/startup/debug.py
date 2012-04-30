@@ -20,6 +20,7 @@ import zope.app.wsgi
 import zope.app.debug
 from pprint import pprint
 from zope.securitypolicy.zopepolicy import settingsForObject
+from zope.component import getUtility, getMultiAdapter
 
 from IPython.frontend.terminal.embed import InteractiveShellEmbed
 shell = InteractiveShellEmbed()
@@ -60,9 +61,11 @@ class GrokDebug(object):
                     root=self.root,
                     ctx=self.ctx,
                     sec=self.get_security_settings,
+                    gu=getUtility,
+                    gma=getMultiAdapter,
                     sync=self.sync,
                     pby=self.providedBy,
-                    commit=self.commit)
+                    commit=transaction.commit)
 
     def update_ns(self):
         shell.user_ns.update(self.ns())
@@ -73,9 +76,6 @@ class GrokDebug(object):
 
     def sync(self):
         self.root._p_jar.sync()
-
-    def commit(self):
-        transaction.commit()
 
     def ls(self, path=None):
         """List objects.
@@ -152,7 +152,7 @@ class GrokDebug(object):
     def providedBy(self, obj=None):
         if not obj:
             obj = self.ctx
-        return list(zope.interface.providedBy(obj)) 
+        return list(zope.interface.providedBy(obj))
 
 def get_context_by_path(context, path):
     for name in (p for p in path.split(PATH_SEP) if p):
@@ -195,6 +195,8 @@ def ipython_debug_prompt(zope_conf):
           cdg / ;cdg
           lsg / ;lsg
           sec / ;sec
+          gu  / ;gu
+          gma / ;gma
           pby (providedBy)
           pwdg
           sync
