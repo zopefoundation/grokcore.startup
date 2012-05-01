@@ -4,8 +4,9 @@ Changes
 1.2 (unreleased)
 ================
 
-- Nothing changed yet.
-
+- Added new IPython-based interactive debugger which is used
+  automatically when IPython is available. Otherwise the gdb-style
+  debugger is provided.
 
 1.1 (2010-10-26)
 ================

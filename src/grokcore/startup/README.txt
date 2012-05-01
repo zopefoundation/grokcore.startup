@@ -260,10 +260,33 @@ API Documentation
     >>> import shutil
     >>> shutil.rmtree(temp_dir)
 
-``interactive_debug_prompt(zope_conf_path)``
+``get_debugger(zope_conf_path)``
 --------------------------------------------
 
   Get an interactive console with a debugging shell started.
+
+  `grokcore.startup` provides two different debuggers currently: a
+  plain one based on `zope.app.debug` and a more powerful `IPython`_
+  debugger. The IPython debugger is automatically enabled if you have
+  IPython available in the environment.
+
+  You can explicitly enable the IPython_ debugger by stating::
+
+    grokcore.startup [debug]
+
+  in the install requirements of your `setup.py`, probably adding only
+  ``[debug]`` to an already existing entry for
+  `grokcore.startup`. Don't forget to rerun `buildout` afterwards.
+
+  You can explicitly require one or the other debugger by calling::
+
+    grokcore.startup.startup.interactive_debug_prompt(zope_conf)
+
+  or::
+
+    grokcore.startup.debug.ipython_debug_prompt(zope_conf)
+
+  in the ``[interactive_debugger]`` section of your ``buildout.cfg``.
 
     >>> import zope.app.appsetup.appsetup
     >>> # Ugh - allow a reconfiguration of an app.
@@ -313,7 +336,7 @@ API Documentation
     ... pprint(__file__)
     ... pprint(__name__)""")
     >>>
-    >>> sys.argv = ['interactive_debug_prompt', script]
+    >>> sys.argv = ['get_debugger', script]
     >>> from grokcore.startup import interactive_debug_prompt
     >>> try:
     ...     interactive_debug_prompt(zope_conf=zopeconf)
@@ -347,3 +370,4 @@ API Documentation
 .. _WSGI: http://www.wsgi.org/wsgi/
 .. _WSGIPublisherApplication: http://apidoc.zope.org/++apidoc++/Code/zope/app/wsgi/WSGIPublisherApplication/index.html
 .. _zc.buildout: http://pypi.python.org/pypi/zc.buildout
+.. _ipython: http://ipython.org/

@@ -12,6 +12,8 @@
 #
 ##############################################################################
 # Make this a package.
-from grokcore.startup.startup import (application_factory,
-                                      debug_application_factory,
-                                      interactive_debug_prompt)
+from grokcore.startup.startup import (
+    application_factory,
+    debug_application_factory,
+    interactive_debug_prompt,
+    )

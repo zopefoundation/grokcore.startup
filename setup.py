@@ -18,6 +18,11 @@ tests_require = [
     'zope.interface',
     'zope.testing',
     'zope.security',
+    'zope.securitypolicy',
+    ]
+
+debug_requires = [
+    'IPython',
     ]
 
 setup(
@@ -50,7 +55,7 @@ setup(
                       'zope.app.debug',
                       ],
     tests_require = tests_require,
-    extras_require = dict(test=tests_require),
+    extras_require = dict(test=tests_require, debug=debug_requires),
     entry_points={
         'paste.app_factory': [
             'main = grokcore.startup:application_factory',
