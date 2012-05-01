@@ -32,32 +32,11 @@ def debug_application_factory(global_conf, **local_conf):
     # Return the created application
     return app
 
-def _classic_debug_prompt(zope_conf):
-    db = zope.app.wsgi.config(zope_conf)
-    debugger = zope.app.debug.Debugger.fromDatabase(db)
+def _classic_debug_prompt(debugger):
     globals_ = {
         'debugger': debugger,
         'app': debugger,
         'root': debugger.root()}
-
-    if len(sys.argv) > 1:
-        # There're arguments passed to the command. We replicate the
-        # "old" zopectl run command behaviour that would execfile()
-        # the second argument.
-
-        # The current first argument is the interactive_debugger command
-        # itself. Pop it from the args list and as a result, the script
-        # to run is the first argument.
-        del sys.argv[0]
-
-        globals_['__name__'] = '__main__'
-        globals_['__file__'] = sys.argv[0]
-        execfile(sys.argv[0], globals_)
-
-        # Housekeeping.
-        db.close()
-        sys.exit()
-
     # Invoke an interactive interpreter prompt
     banner = (
         "Welcome to the interactive debug prompt.\n"
@@ -66,13 +45,34 @@ def _classic_debug_prompt(zope_conf):
         "simulates a request.")
     code.interact(banner=banner, local=globals_)
 
-def _ipython_debug_prompt(zope_conf):
+def _ipython_debug_prompt(debugger):
     from grokcore.startup.debug import ipython_debug_prompt
-    return ipython_debug_prompt(zope_conf)
+    return ipython_debug_prompt(debugger)
 
 def interactive_debug_prompt(zope_conf):
+    db = zope.app.wsgi.config(zope_conf)
+    debugger = zope.app.debug.Debugger.fromDatabase(db)
+    if len(sys.argv) > 1:
+        # There're arguments passed to the command. We replicate the
+        # "old" zopectl run command behaviour that would execfile()
+        # the second argument.
+        globals_ = {
+            'debugger': debugger,
+            'app': debugger,
+            'root': debugger.root()}
+        # The current first argument is the interactive_debugger command
+        # itself. Pop it from the args list and as a result, the script
+        # to run is the first argument.
+        del sys.argv[0]
+        globals_['__name__'] = '__main__'
+        globals_['__file__'] = sys.argv[0]
+        execfile(sys.argv[0], globals_)
+        # Housekeeping.
+        db.close()
+        sys.exit()
+    # Start the interpreter.
     try:
         import IPython
     except ImportError:
-        return _classic_debug_prompt(zope_conf)
-    return _ipython_debug_prompt(zope_conf)
+        return _classic_debug_prompt(debugger)
+    return _ipython_debug_prompt(debugger)

@@ -260,7 +260,7 @@ API Documentation
     >>> import shutil
     >>> shutil.rmtree(temp_dir)
 
-``get_debugger(zope_conf_path)``
+``interactive_debug_prompt(zope_conf_path)``
 --------------------------------------------
 
   Get an interactive console with a debugging shell started.
@@ -289,10 +289,10 @@ API Documentation
   in the ``[interactive_debugger]`` section of your ``buildout.cfg``.
 
     >>> import zope.app.appsetup.appsetup
-    >>> # Ugh - allow a reconfiguration of an app.
     >>> zope.app.appsetup.appsetup._configured = False
 
     >>> temp_dir = tempfile.mkdtemp()
+
     >>> sitezcml = os.path.join(temp_dir, 'site.zcml')
     >>> open(sitezcml, 'w').write(
     ...    """<configure xmlns="http://namespaces.zope.org/zope">
@@ -336,10 +336,10 @@ API Documentation
     ... pprint(__file__)
     ... pprint(__name__)""")
     >>>
-    >>> sys.argv = ['get_debugger', script]
+    >>> sys.argv = ['interactive_debugger', script]
     >>> from grokcore.startup import interactive_debug_prompt
     >>> try:
-    ...     interactive_debug_prompt(zope_conf=zopeconf)
+    ...     interactive_debug_prompt(zopeconf)
     ... except SystemExit:
     ...     # Catch the exit from the interactive prompt as it would
     ...     # exit this test as well.

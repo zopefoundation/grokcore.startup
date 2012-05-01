@@ -30,9 +30,8 @@ PATH_SEP = '/'
 
 class GrokDebug(object):
 
-    def __init__(self, zope_conf='parts/etc/zope.debug.conf'):
-        db = zope.app.wsgi.config(zope_conf)
-        debugger = zope.app.debug.Debugger.fromDatabase(db)
+    def __init__(self, debugger):
+        debugger = debugger
         self.app = debugger
         self.root = debugger.root()
         self.context = self.root
@@ -179,8 +178,8 @@ def path_completer(self, event):
             if obj.__name__.startswith(tail)]
 
 
-def ipython_debug_prompt(zope_conf):
-    grokd = GrokDebug(zope_conf)
+def ipython_debug_prompt(debugger):
+    grokd = GrokDebug(debugger)
     banner = textwrap.dedent(
         """\
         IPython shell for Grok.
