@@ -12,27 +12,8 @@
 #
 ##############################################################################
 # Make this a package.
-from grokcore.startup.startup import (application_factory,
-                                      debug_application_factory,
-                                      interactive_debug_prompt,)
-
-
-
-def get_debugger(zope_conf):
-    """Get an interactive debugger.
-
-    If IPython is available you get an IPython-based debugger with
-    lots of fancy features (see :mod:`grokcore.startup.debug` for
-    details.
-
-    Otherwise you get a plain debugger in pdb style.
-    """
-    try:
-        import IPython
-    except ImportError:
-        return interactive_debug_prompt(zope_conf)
-    # late import: the debug module is only importable with IPython
-    # available.
-    from grokcore.startup.debug import ipython_debug_prompt
-    return ipython_debug_prompt(zope_conf)
-
+from grokcore.startup.startup import (
+    application_factory,
+    debug_application_factory,
+    interactive_debug_prompt,
+    )

@@ -337,9 +337,9 @@ API Documentation
     ... pprint(__name__)""")
     >>>
     >>> sys.argv = ['get_debugger', script]
-    >>> from grokcore.startup import get_debugger
+    >>> from grokcore.startup import interactive_debug_prompt
     >>> try:
-    ...     get_debugger(zope_conf=zopeconf)
+    ...     interactive_debug_prompt(zope_conf=zopeconf)
     ... except SystemExit:
     ...     # Catch the exit from the interactive prompt as it would
     ...     # exit this test as well.

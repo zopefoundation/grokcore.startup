@@ -32,9 +32,7 @@ def debug_application_factory(global_conf, **local_conf):
     # Return the created application
     return app
 
-def interactive_debug_prompt(
-    zope_conf=os.path.join('parts', 'etc', 'zope.conf')):
-
+def _classic_debug_prompt(zope_conf):
     db = zope.app.wsgi.config(zope_conf)
     debugger = zope.app.debug.Debugger.fromDatabase(db)
     globals_ = {
@@ -67,3 +65,14 @@ def interactive_debug_prompt(
         "The 'app' variable contains the Debugger, 'app.publish(path)' "
         "simulates a request.")
     code.interact(banner=banner, local=globals_)
+
+def _ipython_debug_prompt(zope_conf):
+    from grokcore.startup.debug import ipython_debug_prompt
+    return ipython_debug_prompt(zope_conf)
+
+def interactive_debug_prompt(zope_conf):
+    try:
+        import IPython
+    except ImportError:
+        return _classic_debug_prompt(zope_conf)
+    return _ipython_debug_prompt(zope_conf)
