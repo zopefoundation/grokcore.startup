@@ -1,20 +1,21 @@
+import doctest
 import os
 import re
 import unittest
-from zope.testing import doctest, renormalizing
+from zope.testing import renormalizing
 
 checker = renormalizing.RENormalizing([
     # str(Exception) has changed from Python 2.4 to 2.5 (due to
     # Exception now being a new-style class).  This changes the way
     # exceptions appear in traceback printouts.
-    (re.compile(r"ConfigurationExecutionError: <class '([\w.]+)'>:"),
-                r'ConfigurationExecutionError: \1:'),
-    ])
+    (re.compile(
+        r"ConfigurationExecutionError: <class '([\w.]+)'>:"),
+        r'ConfigurationExecutionError: \1:')])
 
-optionflags=(doctest.ELLIPSIS+
-            doctest.NORMALIZE_WHITESPACE)
+optionflags = (doctest.ELLIPSIS + doctest.NORMALIZE_WHITESPACE)
 
 main_doctests = ['README.txt']
+
 
 def test_suite():
     suite = unittest.TestSuite()
