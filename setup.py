@@ -27,7 +27,7 @@ debug_requires = [
 
 setup(
     name='grokcore.startup',
-    version='1.2.1',
+    version='1.2.2.dev0',
     author='Grok Team',
     author_email='grok-dev@zope.org',
     url='http://grok.zope.org',
