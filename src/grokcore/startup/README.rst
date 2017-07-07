@@ -52,17 +52,19 @@ in ``setup.py``. A minimal setup could look like this::
         include_package_data=True,
         zip_safe=False,
         install_requires=['setuptools',],
-         entry_points={
-          #YOU MAY ALSO WANT FANSTATIC
-          #'fanstatic.libraries': [
-          #    'zopache = zopache.resource:library',
-          #     ],
-        'paste.app_factory': [
-            'main = grokcore.startup:application_factory',
-            'debug = grokcore.startup:debug_application_factory',
-          ],
-      },
-        )
+        entry_points={
+            'paste.app_factory': [
+               'main = grokcore.startup:application_factory',
+               'debug = grokcore.startup:debug_application_factory',
+               ],
+
+             #YOU WILL PROBABLY  ALSO WANT FANSTATIC
+             #'fanstatic.libraries': [
+             #    'zopache = zopache.resource:library',
+             #     ],
+
+        },
+  )
 
 Here the `paste.app_factory` entry point pointing to
 `grokcore.startup:application_factory` is important.
@@ -126,14 +128,19 @@ which tells paster where to find the pieces. This is also put into the
 created by grokproject:
 
   [app:main]
+
   use = egg:sampleproject
 
   [server:main]
+
   use = egg:Paste#http
+
   host = 127.0.0.1
+
   port = 8080
 
   [DEFAULT]
+
   zope_conf = %(here)s/zope.conf
 
 
