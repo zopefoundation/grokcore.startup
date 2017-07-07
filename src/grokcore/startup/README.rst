@@ -9,24 +9,6 @@ The main target of this package is to provide support for enabling
 applications. To make this working some configuration files have to be
 set up.
 
-Setting up a project with ``grokproject``
------------------------------------------
-
-The most convenient way to setup a `Grok`_ project is using
-`grokproject`_. Once installed, you can a project like this::
-
-  $ grokproject Sample
-
-which will generate all configuration files for you.
-
-.. note:: Older versions of `grokproject`_ need an update
-
-  As older versions of `grokproject`_ do not support
-  `grokcore.startup`, you might want to update your existing
-  `grokproject`_ installation by running::
-
-    $ easy_install -U grokproject
-
 
 Setting up a project manually
 -----------------------------
@@ -70,10 +52,16 @@ in ``setup.py``. A minimal setup could look like this::
         include_package_data=True,
         zip_safe=False,
         install_requires=['setuptools',],
-        entry_points = """
-        [paste.app_factory]
-        main = grokcore.startup:application_factory
-        """,
+         entry_points={
+          #YOU MAY ALSO WANT FANSTATIC
+          #'fanstatic.libraries': [
+          #    'zopache = zopache.resource:library',
+          #     ],
+        'paste.app_factory': [
+            'main = grokcore.startup:application_factory',
+            'debug = grokcore.startup:debug_application_factory',
+          ],
+      },
         )
 
 Here the `paste.app_factory` entry point pointing to
@@ -132,7 +120,7 @@ where the ``site-definition`` entry should point to the location of
 the file ``site.zcml``. In regular Grok projects those files are put
 into the ``etc/`` subdirectory of your project root.
 
-Finally we have to provide a ``deploy.ini`` (or another .ini-file),
+Finally we have to provide a ``deploy.ini``  and ``debug.ini`` 
 which tells paster where to find the pieces. This is also put into the
 ``etc/`` subdirectory of your project root in regular Grok projects
 created by `grokproject`_::
