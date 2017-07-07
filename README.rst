@@ -1,3 +1,4 @@
+
 grokcore.startup
 ****************
 
@@ -35,7 +36,7 @@ And of course it is very helpful to read the
 `grokcore.startup <./src/grokcore/startup/README.rst>`_ documentation.
 
 And if all of that still does not solve your problems, 
-there is great documentation over at 
+there is great detailed documentation over at the  
 `Pyramid Pages on PasteDeploy <https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/paste.html>`_.
 
 Setting up ``grokcore.startup``
