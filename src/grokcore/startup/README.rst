@@ -5,7 +5,7 @@ Setting up Grok projects as ``paster`` served WSGI applications
 ===============================================================
 
 The main target of this package is to provide support for enabling
-`Grok`_ applications to be run as `paster`_ served `WSGI`_
+`Grok`_ applications to be run as `paster`_ served `WSGI
 applications. To make this working some configuration files have to be
 set up.
 
@@ -30,7 +30,7 @@ several configuration files in the project root:
   ``parts/etc/`` subdirectory of your `Grok`_ project)
 
 
-When we want to setup a Zope instance as `paster`_ served `WSGI`_
+When we want to setup a Zope instance as paster served WSGI
 application, then we have to set a ``paste.app_factory`` entry point
 in ``setup.py``. A minimal setup could look like this::
 
@@ -123,7 +123,7 @@ into the ``etc/`` subdirectory of your project root.
 Finally we have to provide a ``deploy.ini``  and ``debug.ini`` 
 which tells paster where to find the pieces. This is also put into the
 ``etc/`` subdirectory of your project root in regular Grok projects
-created by `grokproject`_::
+created by grokproject:
 
   [app:main]
   use = egg:sampleproject
@@ -145,11 +145,11 @@ API Documentation
 --------------------------------------------------
 
   ``grokcore.startup`` provides a function ``application_factory``
-  which delivers a `WSGIPublisherApplication`_ instance when called
+  which delivers a WSGIPublisherApplication instance when called
   with an appropriate configuration. See the `zope.app.wsgi
   documentation
   <http://apidoc.zope.org/++apidoc++/Code/zope/app/wsgi/README.txt/index.html>`_
-  to learn more about Zope objects supporting `WSGI`_.
+  to learn more about Zope objects supporting WSGI.
 
   A call to this function is normally required as entry point in
   `setuptools`_-driven `paster`_ environments  (see
