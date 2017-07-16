@@ -5,27 +5,9 @@ Setting up Grok projects as ``paster`` served WSGI applications
 ===============================================================
 
 The main target of this package is to provide support for enabling
-`Grok`_ applications to be run as `paster`_ served `WSGI`_
+`Grok`_ applications to be run as `paster`_ served `WSGI
 applications. To make this working some configuration files have to be
 set up.
-
-Setting up a project with ``grokproject``
------------------------------------------
-
-The most convenient way to setup a `Grok`_ project is using
-`grokproject`_. Once installed, you can a project like this::
-
-  $ grokproject Sample
-
-which will generate all configuration files for you.
-
-.. note:: Older versions of `grokproject`_ need an update
-
-  As older versions of `grokproject`_ do not support
-  `grokcore.startup`, you might want to update your existing
-  `grokproject`_ installation by running::
-
-    $ easy_install -U grokproject
 
 
 Setting up a project manually
@@ -48,7 +30,7 @@ several configuration files in the project root:
   ``parts/etc/`` subdirectory of your `Grok`_ project)
 
 
-When we want to setup a Zope instance as `paster`_ served `WSGI`_
+When we want to setup a Zope instance as paster served WSGI
 application, then we have to set a ``paste.app_factory`` entry point
 in ``setup.py``. A minimal setup could look like this::
 
@@ -70,11 +52,19 @@ in ``setup.py``. A minimal setup could look like this::
         include_package_data=True,
         zip_safe=False,
         install_requires=['setuptools',],
-        entry_points = """
-        [paste.app_factory]
-        main = grokcore.startup:application_factory
-        """,
-        )
+        entry_points={
+            'paste.app_factory': [
+               'main = grokcore.startup:application_factory',
+               'debug = grokcore.startup:debug_application_factory',
+               ],
+
+             #YOU WILL PROBABLY  ALSO WANT FANSTATIC
+             #'fanstatic.libraries': [
+             #    'zopache = zopache.resource:library',
+             #     ],
+
+        },
+  )
 
 Here the `paste.app_factory` entry point pointing to
 `grokcore.startup:application_factory` is important.
@@ -132,20 +122,25 @@ where the ``site-definition`` entry should point to the location of
 the file ``site.zcml``. In regular Grok projects those files are put
 into the ``etc/`` subdirectory of your project root.
 
-Finally we have to provide a ``deploy.ini`` (or another .ini-file),
+Finally we have to provide a ``deploy.ini``  and ``debug.ini`` 
 which tells paster where to find the pieces. This is also put into the
 ``etc/`` subdirectory of your project root in regular Grok projects
-created by `grokproject`_::
+created by grokproject:
 
   [app:main]
+
   use = egg:sampleproject
 
   [server:main]
+
   use = egg:Paste#http
+
   host = 127.0.0.1
+
   port = 8080
 
   [DEFAULT]
+
   zope_conf = %(here)s/zope.conf
 
 
@@ -157,11 +152,11 @@ API Documentation
 --------------------------------------------------
 
   ``grokcore.startup`` provides a function ``application_factory``
-  which delivers a `WSGIPublisherApplication`_ instance when called
+  which delivers a WSGIPublisherApplication instance when called
   with an appropriate configuration. See the `zope.app.wsgi
   documentation
   <http://apidoc.zope.org/++apidoc++/Code/zope/app/wsgi/README.txt/index.html>`_
-  to learn more about Zope objects supporting `WSGI`_.
+  to learn more about Zope objects supporting WSGI.
 
   A call to this function is normally required as entry point in
   `setuptools`_-driven `paster`_ environments  (see
