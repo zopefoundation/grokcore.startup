@@ -173,13 +173,16 @@ API Documentation
     >>> import os, tempfile
     >>> temp_dir = tempfile.mkdtemp()
     >>> sitezcml = os.path.join(temp_dir, 'site.zcml')
-    >>> _ = open(sitezcml, 'w').write('<configure />')
+    >>> out = open(sitezcml, 'w')
+    >>> _ = out.write('<configure />')
+    >>> out.close()
 
   Furthermore we create a Zope configuration file, which is also quite
   plain::
 
     >>> zope_conf = os.path.join(temp_dir, 'zope.conf')
-    >>> _ = open(zope_conf, 'w').write('''
+    >>> out = open(zope_conf, 'w')
+    >>> _ = out.write('''
     ... site-definition %s
     ...
     ... <zodb>
@@ -191,7 +194,8 @@ API Documentation
     ...     path STDOUT
     ...   </logfile>
     ... </eventlog>
-    ... ''' %sitezcml)
+    ... ''' % sitezcml)
+    >>> out.close()
 
   Now we can call ``application_factory`` to get a WSGI application::
 
@@ -295,7 +299,8 @@ API Documentation
     >>> temp_dir = tempfile.mkdtemp()
 
     >>> sitezcml = os.path.join(temp_dir, 'site.zcml')
-    >>> _ = open(sitezcml, 'w').write(
+    >>> out = open(sitezcml, 'w')
+    >>> _ = out.write(
     ...    """<configure xmlns="http://namespaces.zope.org/zope">
     ...   <include package="zope.component" file="meta.zcml"/>
     ...   <include package="zope.component"/>
@@ -306,9 +311,11 @@ API Documentation
     ...   <include package="zope.site"/>
     ...   <include package="zope.app.appsetup"/>
     ... </configure>""")
+    >>> out.close()
     >>>
     >>> zopeconf = os.path.join(temp_dir, 'zope.conf')
-    >>> _ = open(zopeconf, 'w').write("""
+    >>> out = open(zopeconf, 'w')
+    >>> _ = out.write("""
     ...     site-definition %s
     ...     <zodb>
     ...       <filestorage>
@@ -322,12 +329,14 @@ API Documentation
     ...       </logfile>
     ...     </eventlog>
     ...     """ % (sitezcml, os.path.join(temp_dir, 'Data.fs')))
+    >>> out.close()
     >>>
     >>> import sys
     >>> old_argv = sys.argv[:]
     >>>
     >>> script = os.path.join(temp_dir, 'script.py')
-    >>> _ = open(script, 'w').write(
+    >>> out = open(script, 'w')
+    >>> _ = out.write(
     ...    """import sys
     ... from pprint import pprint
     ... pprint(debugger)
@@ -336,6 +345,8 @@ API Documentation
     ... pprint(sys.argv)
     ... pprint(__file__)
     ... pprint(__name__)""")
+    >>>
+    >>> out.close()
     >>>
     >>> sys.argv = ['interactive_debugger', script]
     >>> from grokcore.startup import interactive_debug_prompt
