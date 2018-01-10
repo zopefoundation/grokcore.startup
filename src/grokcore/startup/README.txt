@@ -173,13 +173,13 @@ API Documentation
     >>> import os, tempfile
     >>> temp_dir = tempfile.mkdtemp()
     >>> sitezcml = os.path.join(temp_dir, 'site.zcml')
-    >>> open(sitezcml, 'w').write('<configure />')
+    >>> _ = open(sitezcml, 'w').write('<configure />')
 
   Furthermore we create a Zope configuration file, which is also quite
   plain::
 
     >>> zope_conf = os.path.join(temp_dir, 'zope.conf')
-    >>> open(zope_conf, 'wb').write('''
+    >>> _ = open(zope_conf, 'w').write('''
     ... site-definition %s
     ...
     ... <zodb>
@@ -224,10 +224,11 @@ API Documentation
     >>> app_factory
     <zope.app.wsgi.WSGIPublisherApplication object at 0x...>
 
-    >>> from zope.interface import implements
+    >>> from zope.interface import implementer
     >>> from zope.security.interfaces import IUnauthorized
-    >>> class UnauthorizedException(object):
-    ...     implements(IUnauthorized)
+    >>> @implementer(IUnauthorized)
+    ... class UnauthorizedException(object):
+    ...     pass
     >>>
     >>> from zope.component import queryAdapter
     >>> from zope.publisher.interfaces import IReRaiseException
@@ -294,7 +295,7 @@ API Documentation
     >>> temp_dir = tempfile.mkdtemp()
 
     >>> sitezcml = os.path.join(temp_dir, 'site.zcml')
-    >>> open(sitezcml, 'w').write(
+    >>> _ = open(sitezcml, 'w').write(
     ...    """<configure xmlns="http://namespaces.zope.org/zope">
     ...   <include package="zope.component" file="meta.zcml"/>
     ...   <include package="zope.component"/>
@@ -307,7 +308,7 @@ API Documentation
     ... </configure>""")
     >>>
     >>> zopeconf = os.path.join(temp_dir, 'zope.conf')
-    >>> open(zopeconf, 'w').write("""
+    >>> _ = open(zopeconf, 'w').write("""
     ...     site-definition %s
     ...     <zodb>
     ...       <filestorage>
@@ -326,7 +327,7 @@ API Documentation
     >>> old_argv = sys.argv[:]
     >>>
     >>> script = os.path.join(temp_dir, 'script.py')
-    >>> open(script, 'w').write(
+    >>> _ = open(script, 'w').write(
     ...    """import sys
     ... from pprint import pprint
     ... pprint(debugger)
