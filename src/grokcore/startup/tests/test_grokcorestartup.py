@@ -28,6 +28,3 @@ def test_suite():
                 globs=globals(),
                 checker=checker))
     return suite
-
-if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite')
