@@ -1,0 +1,22 @@
+# Generated from:
+# https://github.com/zopefoundation/meta/tree/master/config/pure-python
+[meta]
+template = "pure-python"
+commit-id = "13207dce4ea1a51f579fedbf1b41b30fb60d4216"
+
+[python]
+with-pypy = true
+with-legacy-python = true
+with-docs = false
+with-sphinx-doctests = false
+with-appveyor = false
+
+[coverage]
+fail-under = 31
+
+[flake8]
+additional-config = [
+    "# F401 imported but unused",
+    "per-file-ignores =",
+    "    src/grokcore/startup/__init__.py: F401",
+    ]

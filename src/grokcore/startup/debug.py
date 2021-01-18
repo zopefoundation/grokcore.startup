@@ -11,7 +11,6 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-import sys
 import os.path
 import textwrap
 
@@ -27,6 +26,7 @@ shell = InteractiveShellEmbed()
 
 
 PATH_SEP = '/'
+
 
 class GrokDebug(object):
 
@@ -96,7 +96,6 @@ class GrokDebug(object):
         context = get_context_by_path(self.get_start_context(path), path)
         return self._get_object_names(context)
 
-
     def cd(self, path):
         """cd to specified path.
 
@@ -153,28 +152,30 @@ class GrokDebug(object):
             obj = self.ctx
         return list(zope.interface.providedBy(obj))
 
+
 def get_context_by_path(context, path):
     for name in (p for p in path.split(PATH_SEP) if p):
         context = context[name]
     return context
 
+
 def path_completer(self, event):
     """TAB path completer for `cdg` and `lsg` commands."""
     relpath = event.symbol
 
-    context = grokd.get_start_context(relpath)
+    context = grokd.get_start_context(relpath)  # noqa: F821 undefined name
 
     # ends with '/'
     if relpath.endswith(PATH_SEP):
         context = get_context_by_path(context, relpath)
-        return [relpath+obj.__name__ for obj in context.values()]
+        return [relpath + obj.__name__ for obj in context.values()]
 
     head, tail = os.path.split(relpath)
     if head and not head.endswith(PATH_SEP):
         head += PATH_SEP
     context = get_context_by_path(context, head)
 
-    return [head+obj.__name__ for obj in context.values()
+    return [head + obj.__name__ for obj in context.values()
             if obj.__name__.startswith(tail)]
 
 
@@ -203,6 +204,6 @@ def ipython_debug_prompt(debugger):
         """)
 
     shell.user_ns.update(grokd.ns())
-    shell.banner2=banner
+    shell.banner2 = banner
     shell.set_hook('complete_command', path_completer, re_key='.*cdg|.*lsg')
     shell(local_ns=grokd.ns())
