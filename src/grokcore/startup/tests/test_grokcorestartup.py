@@ -2,7 +2,9 @@ import doctest
 import os
 import re
 import unittest
+
 from zope.testing import renormalizing
+
 
 checker = renormalizing.RENormalizing([
     # str(Exception) has changed from Python 2.4 to 2.5 (due to

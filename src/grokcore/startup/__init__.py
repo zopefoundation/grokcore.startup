@@ -11,8 +11,6 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-from grokcore.startup.startup import (
-    application_factory,
-    debug_application_factory,
-    interactive_debug_prompt,
-)
+from grokcore.startup.startup import application_factory
+from grokcore.startup.startup import debug_application_factory
+from grokcore.startup.startup import interactive_debug_prompt
