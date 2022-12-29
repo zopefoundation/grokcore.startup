@@ -1,12 +1,12 @@
+import code
 import os.path
 import sys
-import code
-import zope.app.wsgi
-import zope.app.debug
 
+import zope.app.debug
+import zope.app.wsgi
 from zope.component import provideAdapter
-from zope.publisher.interfaces import IReRaiseException
 from zope.dottedname.resolve import resolve
+from zope.publisher.interfaces import IReRaiseException
 
 
 def application_factory(global_conf, **local_conf):

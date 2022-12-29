@@ -13,22 +13,24 @@
 ##############################################################################
 import os.path
 import textwrap
+from pprint import pprint
 
 import transaction
-import zope.app.wsgi
 import zope.app.debug
-from pprint import pprint
-from zope.securitypolicy.zopepolicy import settingsForObject
-from zope.component import getUtility, getMultiAdapter
-
+import zope.app.wsgi
 from IPython.frontend.terminal.embed import InteractiveShellEmbed
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.securitypolicy.zopepolicy import settingsForObject
+
+
 shell = InteractiveShellEmbed()
 
 
 PATH_SEP = '/'
 
 
-class GrokDebug(object):
+class GrokDebug:
 
     def __init__(self, debugger):
         debugger = debugger
