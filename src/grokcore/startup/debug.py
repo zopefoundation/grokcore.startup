@@ -30,7 +30,7 @@ shell = InteractiveShellEmbed()
 PATH_SEP = '/'
 
 
-class GrokDebug(object):
+class GrokDebug:
 
     def __init__(self, debugger):
         debugger = debugger
