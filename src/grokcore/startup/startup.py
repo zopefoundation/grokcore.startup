@@ -73,7 +73,8 @@ def interactive_debug_prompt(zope_conf):
         del sys.argv[0]
         globals_['__name__'] = '__main__'
         globals_['__file__'] = sys.argv[0]
-        exec(open(sys.argv[0]).read(), globals_)
+        with open(sys.argv[0]) as f:
+            exec(f.read(), globals_)
         # Housekeeping.
         db.close()
         sys.exit()
