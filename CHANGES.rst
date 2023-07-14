@@ -10,13 +10,9 @@ Changes
 4.0 (2023-07-14)
 ================
 
-- Add support for Python 3.10, 3.11.
+- Drop support for Python 2.7, 3.4, 3.5, 3.6.
 
-- Drop support for Python 2.7, 3.5, 3.6.
-
-- Add support for Python 3.7, 3.8 and 3.9.
-
-- Drop support for Python 3.4.
+- Add support for Python 3.7, 3.8, 3.9, 3.10, 3.11.
 
 
 3.0.1 (2018-01-12)
