@@ -5,7 +5,7 @@ import unittest
 
 optionflags = doctest.ELLIPSIS + doctest.NORMALIZE_WHITESPACE
 
-main_doctests = ['README.txt']
+main_doctests = ['README.rst']
 
 
 def test_suite():

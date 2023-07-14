@@ -9,11 +9,11 @@ def read(*rnames):
 
 
 long_description = (
-    read('README.txt')
+    read('README.rst')
     + '\n' +
-    read(os.path.join('src', 'grokcore', 'startup', 'README.txt'))
+    read(os.path.join('src', 'grokcore', 'startup', 'README.rst'))
     + '\n' +
-    read('CHANGES.txt')
+    read('CHANGES.rst')
 )
 
 
@@ -36,9 +36,8 @@ setup(
     name='grokcore.startup',
     version='4.0.dev0',
     author='Grok Team',
-    author_email='grok-dev@zope.org',
-    url='http://grok.zope.org',
-    download_url='http://pypi.python.org/pypi/grokcore.startup',
+    author_email='zope-dev@zope.dev',
+    url='https://github.com/zopefoundation/grokcore.startup',
     description='Paster support for Grok projects.',
     long_description=long_description,
     license='ZPL',
@@ -64,6 +63,7 @@ setup(
     namespace_packages=['grokcore'],
     include_package_data=True,
     zip_safe=False,
+    python_requires='>=3.7',
     install_requires=[
         'setuptools',
         'zope.app.debug',
@@ -72,7 +72,6 @@ setup(
         'zope.dottedname',
         'zope.publisher',
     ],
-    tests_require=tests_require,
     extras_require=dict(test=tests_require, debug=debug_requires),
     entry_points={
         'paste.app_factory': [
