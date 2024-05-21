@@ -18,7 +18,7 @@ from pprint import pprint
 import transaction
 import zope.app.debug
 import zope.app.wsgi
-from IPython.frontend.terminal.embed import InteractiveShellEmbed
+from IPython.terminal.embed import InteractiveShellEmbed
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.securitypolicy.zopepolicy import settingsForObject
