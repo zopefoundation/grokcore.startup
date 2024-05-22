@@ -9,13 +9,9 @@ def read(*rnames):
 
 
 long_description = (
-    read('README.rst')
-    + '\n' +
-    read(os.path.join('src', 'grokcore', 'startup', 'README.rst'))
-    + '\n' +
-    read('CHANGES.rst')
-)
-
+    read('README.rst') + '\n' +
+    read(os.path.join('src', 'grokcore', 'startup', 'README.rst')) + '\n' +
+    read('CHANGES.rst'))
 
 tests_require = [
     'zope.app.appsetup',
@@ -27,9 +23,8 @@ tests_require = [
     'zope.testrunner',
 ]
 
-
 debug_requires = [
-    'IPython',
+    'IPython >= 8',
 ]
 
 setup(
