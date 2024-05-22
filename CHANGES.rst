@@ -4,7 +4,8 @@ Changes
 4.1 (unreleased)
 ================
 
-- Nothing changed yet.
+- Update ``debug.py`` to run with ``IPython >= 8``. Also requiring at least
+  that version of IPython.
 
 
 4.0 (2023-07-14)

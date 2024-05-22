@@ -18,14 +18,13 @@ from pprint import pprint
 import transaction
 import zope.app.debug
 import zope.app.wsgi
-from IPython.frontend.terminal.embed import InteractiveShellEmbed
+from IPython.terminal.embed import InteractiveShellEmbed
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.securitypolicy.zopepolicy import settingsForObject
 
 
 shell = InteractiveShellEmbed()
-
 
 PATH_SEP = '/'
 
@@ -72,8 +71,9 @@ class GrokDebug:
         shell.user_ns.update(self.ns())
 
     def get_security_settings(self, path):
-        pprint(settingsForObject(get_context_by_path(
-                    self.get_start_context(path), path)))
+        pprint(
+            settingsForObject(
+                get_context_by_path(self.get_start_context(path), path)))
 
     def sync(self):
         self.root._p_jar.sync()
@@ -177,14 +177,15 @@ def path_completer(self, event):
         head += PATH_SEP
     context = get_context_by_path(context, head)
 
-    return [head + obj.__name__ for obj in context.values()
-            if obj.__name__.startswith(tail)]
+    return [
+        head + obj.__name__ for obj in context.values()
+        if obj.__name__.startswith(tail)
+    ]
 
 
 def ipython_debug_prompt(debugger):
     grokd = GrokDebug(debugger)
-    banner = textwrap.dedent(
-        """\
+    banner = textwrap.dedent("""\
         IPython shell for Grok.
 
         Bound object names:
