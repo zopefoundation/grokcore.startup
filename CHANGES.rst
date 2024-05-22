@@ -4,6 +4,8 @@ Changes
 4.1 (unreleased)
 ================
 
+- Add support for Python 3.12.
+
 - Update ``debug.py`` to run with ``IPython >= 8``. Also requiring at least
   that version of IPython.
 
