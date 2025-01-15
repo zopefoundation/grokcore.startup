@@ -81,6 +81,6 @@ def interactive_debug_prompt(zope_conf):
     # Start the interpreter.
     try:
         import IPython  # noqa: F401 imported but unused
-    except ImportError:
+    except ModuleNotFoundError:
         return _classic_debug_prompt(debugger)
     return _ipython_debug_prompt(debugger)

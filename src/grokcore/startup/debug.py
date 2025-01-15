@@ -18,13 +18,13 @@ from pprint import pprint
 import transaction
 import zope.app.debug
 import zope.app.wsgi
-from IPython.terminal.embed import InteractiveShellEmbed
+from IPython.terminal.embed import InteractiveShellEmbed  # noqa: T100
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.securitypolicy.zopepolicy import settingsForObject
 
 
-shell = InteractiveShellEmbed()
+shell = InteractiveShellEmbed()  # noqa: T100 trace found
 
 PATH_SEP = '/'
 
