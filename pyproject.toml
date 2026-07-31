@@ -1,13 +1,64 @@
-# 
-# Generated from:
-# https://github.com/zopefoundation/meta/tree/master/config/pure-python
-
+# Generated with zope.meta (https://zopemeta.readthedocs.io/) from:
+# https://github.com/zopefoundation/meta/tree/master/src/zope/meta/pure-python
 [build-system]
-requires = [
-    "setuptools == 78.1.1",
-    "wheel",
-]
+requires = ["setuptools >= 78.1.1,< 82", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "grokcore.startup"
+version = "5.1.dev0"
+description = "Paster support for Grok projects."
+license = "ZPL-2.1"
+classifiers = [
+    "Environment :: Web Environment",
+    "Framework :: Zope :: 3",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: Implementation",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+dynamic = ["readme"]
+requires-python = ">=3.10"
+authors = [{ name = "Grok Team", email = "zope-dev@zope.dev" }]
+maintainers = [
+    { name = "Plone Foundation and contributors", email = "zope-dev@zope.dev" },
+]
+dependencies = [
+    "zope.app.debug",
+    "zope.app.wsgi",
+    "zope.component",
+    "zope.dottedname",
+    "zope.publisher",
+]
+keywords = ["zope", "zope3", "grok", "grokproject", "WSGI", "Paste", "paster"]
+
+[project.optional-dependencies]
+test = [
+    "zope.app.appsetup",
+    "zope.component",
+    "zope.interface",
+    "zope.security",
+    "zope.securitypolicy",
+    "zope.testing",
+    "zope.testrunner >= 6.4",
+]
+debug = [
+    "IPython >= 8",
+]
+
+[project.entry-points."paste.app_factory"]
+main = "grokcore.startup:application_factory"
+debug = "grokcore.startup:debug_application_factory"
+
+[project.urls]
+Source = "https://github.com/zopefoundation/grokcore.startup"
 
 [tool.coverage.run]
 branch = true
@@ -31,3 +82,10 @@ exclude_lines = [
 
 [tool.coverage.html]
 directory = "parts/htmlcov"
+
+[tool.zest-releaser]
+create-wheel = false
+upload-pypi = false
+
+[tool.setuptools.dynamic]
+readme = { file = ["README.rst", "CHANGES.rst"] }
