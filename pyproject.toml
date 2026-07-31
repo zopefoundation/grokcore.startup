@@ -1,10 +1,12 @@
+# Generated with zope.meta (https://zopemeta.readthedocs.io/) from:
+# https://github.com/zopefoundation/meta/tree/master/src/zope/meta/pure-python
 # 
 # Generated from:
 # https://github.com/zopefoundation/meta/tree/master/config/pure-python
 
 [build-system]
 requires = [
-    "setuptools == 78.1.1",
+    "setuptools >= 78.1.1,< 82",
     "wheel",
 ]
 build-backend = "setuptools.build_meta"
@@ -31,3 +33,7 @@ exclude_lines = [
 
 [tool.coverage.html]
 directory = "parts/htmlcov"
+
+[tool.zest-releaser]
+create-wheel = false
+upload-pypi = false
