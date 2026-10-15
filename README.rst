@@ -22,4 +22,3 @@ required packages of your project in ``setup.py``.
 .. _WSGI: https://peps.python.org/pep-3333/
 .. _zc.buildout: https://pypi.org/project/zc.buildout/
 .. _setuptools: https://pypi.org/project/setuptools/
-
